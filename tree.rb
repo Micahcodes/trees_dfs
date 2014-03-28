@@ -13,11 +13,20 @@ class Node
   end
 
   def dfs(value)
-    # if the given value is the same as this node - return self
-    # Otherwise call dfs on each child and see if they found it
-    # if the child found it, return the result
-    # otherwise move on to the next child
-    # If no child can find it, return nil
+    if self.value == value
+      return self
+    end
+
+    self.children.each do |child|
+      result = child.dfs(value)
+      if result
+        if result.value == value
+          return result
+        end
+      end
+    end
+
+    return nil
   end
 
   def bfs(value, queue = [])
